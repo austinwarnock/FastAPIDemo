@@ -22,3 +22,14 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
       ME_CONFIG_BASICAUTH: false
+
+  fastapi:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"  # Forward port 8000 for the API and docs
+    environment:
+      - MONGODB_URL=mongodb://root:example@mongo:27017/
+    depends_on:
+      - mongo
